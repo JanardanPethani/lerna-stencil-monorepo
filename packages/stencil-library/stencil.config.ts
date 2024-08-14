@@ -17,6 +17,7 @@ const tailwindOpts = {
 
 export const config: Config = {
   namespace: 'stencil-library',
+  globalStyle: 'src/global/global.css',
   outputTargets: [
     {
       type: 'dist',

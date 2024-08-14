@@ -47,9 +47,9 @@ interface AssessmentItem {
   };
 }
 
-export interface AssessmentData {
+export type AssessmentData = {
   assessmentCollection: { items: AssessmentItem[] };
-}
+};
 
 @Component({
   tag: 'assessment-form',
@@ -106,7 +106,6 @@ export class AssessmentForm {
     const answer = this.answers[question.name] || '';
 
     const error = this.errors[question.name];
-    console.log(error);
 
     switch (type) {
       case 'text':
@@ -208,16 +207,11 @@ export class AssessmentForm {
     let valid = true;
 
     currentPageData.forEach(question => {
-      if (!this.answers[question.name]) {
+      if (this.answers[question.name]?.length === 0 || !this.answers[question.name]) {
         valid = false;
         this.errors = {
           ...this.errors,
           [question.name]: `Answer is required for this question.`,
-        };
-      } else {
-        this.errors = {
-          ...this.errors,
-          [question.name]: '',
         };
       }
     });
@@ -275,7 +269,7 @@ export class AssessmentForm {
   }
 
   render() {
-    if (!this.assessmentData || this.isResultLoading) {
+    if (this.isResultLoading) {
       return (
         <div class="max-w-2xl mx-auto flex justify-center items-center bg-white h-full">
           <svg
@@ -298,6 +292,10 @@ export class AssessmentForm {
           Loading...
         </div>
       );
+    }
+
+    if (!this.assessmentData) {
+      return <div class="max-w-2xl mx-auto bg-white border border-slate-200 rounded-lg relative">No Data available for questions</div>;
     }
 
     if (this.currentPage <= this.assessmentData.assessmentCollection.items[0].questions.pages.length) {
@@ -341,22 +339,16 @@ export class AssessmentForm {
     }
 
     return (
-      <div class="max-w-2xl mx-auto bg-white border border-slate-200 rounded-lg">
+      <div class="max-w-3xl mx-auto bg-white border border-slate-200 rounded-lg">
         {/* head */}
         <div class="bg-[#F8EDEB] p-5 rounded-t-lg">
-          <p class="text-base text-[#4B4B4B] mt-3">{this.renderDescription(true)}</p>
+          <p class="text-base text-[#4B4B4B] mt-2">{this.renderDescription(true)}</p>
         </div>
-        {}
+
         {this.algoliaResults.length > 0 ? (
-          <div class="mt-3 grid grid-cols-3 gap-3 mx-3">
+          <div class="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3 mx-3">
             {this.algoliaResults.map(result => (
-              <div class="mb-4 p-4 border rounded-lg shadow">
-                <img src={result.imageUrl} alt={result.title} class="w-full h-48 object-cover mb-4" />
-                <h3 class="text-xl font-semibold">{result.title}</h3>
-                <p class="text-sm text-gray-600">Author: {result.author}</p>
-                <p class="text-sm text-gray-600">Type: {result.type}</p>
-                <p class="text-sm text-gray-700 mt-2">{result.description}</p>
-              </div>
+              <result-card result={result} />
             ))}
           </div>
         ) : (

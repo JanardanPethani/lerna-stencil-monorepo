@@ -12,4 +12,5 @@ export const BooleanField = /*@__PURE__*/createReactComponent<JSX.BooleanField, 
 export const CheckboxField = /*@__PURE__*/createReactComponent<JSX.CheckboxField, HTMLCheckboxFieldElement>('checkbox-field');
 export const MyComponent = /*@__PURE__*/createReactComponent<JSX.MyComponent, HTMLMyComponentElement>('my-component');
 export const RadioGroup = /*@__PURE__*/createReactComponent<JSX.RadioGroup, HTMLRadioGroupElement>('radio-group');
+export const ResultCard = /*@__PURE__*/createReactComponent<JSX.ResultCard, HTMLResultCardElement>('result-card');
 export const TextField = /*@__PURE__*/createReactComponent<JSX.TextField, HTMLTextFieldElement>('text-field');

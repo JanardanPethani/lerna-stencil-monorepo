@@ -6,7 +6,9 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { AssessmentData } from "./components/assessment-form/assessment-form";
+import { Result } from "./components/assessment-form/sub-components/result-card/result-card";
 export { AssessmentData } from "./components/assessment-form/assessment-form";
+export { Result } from "./components/assessment-form/sub-components/result-card/result-card";
 export namespace Components {
     interface AssessmentForm {
         "assessmentData": AssessmentData;
@@ -46,6 +48,9 @@ export namespace Components {
         "name": string;
         "questionTitle": string;
         "value": string;
+    }
+    interface ResultCard {
+        "result": Result;
     }
     interface TextField {
         "errorMessage": string;
@@ -150,6 +155,12 @@ declare global {
         prototype: HTMLRadioGroupElement;
         new (): HTMLRadioGroupElement;
     };
+    interface HTMLResultCardElement extends Components.ResultCard, HTMLStencilElement {
+    }
+    var HTMLResultCardElement: {
+        prototype: HTMLResultCardElement;
+        new (): HTMLResultCardElement;
+    };
     interface HTMLTextFieldElementEventMap {
         "valueChange": any;
     }
@@ -173,6 +184,7 @@ declare global {
         "checkbox-field": HTMLCheckboxFieldElement;
         "my-component": HTMLMyComponentElement;
         "radio-group": HTMLRadioGroupElement;
+        "result-card": HTMLResultCardElement;
         "text-field": HTMLTextFieldElement;
     }
 }
@@ -221,6 +233,9 @@ declare namespace LocalJSX {
         "questionTitle"?: string;
         "value"?: string;
     }
+    interface ResultCard {
+        "result"?: Result;
+    }
     interface TextField {
         "errorMessage"?: string;
         "name"?: string;
@@ -234,6 +249,7 @@ declare namespace LocalJSX {
         "checkbox-field": CheckboxField;
         "my-component": MyComponent;
         "radio-group": RadioGroup;
+        "result-card": ResultCard;
         "text-field": TextField;
     }
 }
@@ -246,6 +262,7 @@ declare module "@stencil/core" {
             "checkbox-field": LocalJSX.CheckboxField & JSXBase.HTMLAttributes<HTMLCheckboxFieldElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
             "radio-group": LocalJSX.RadioGroup & JSXBase.HTMLAttributes<HTMLRadioGroupElement>;
+            "result-card": LocalJSX.ResultCard & JSXBase.HTMLAttributes<HTMLResultCardElement>;
             "text-field": LocalJSX.TextField & JSXBase.HTMLAttributes<HTMLTextFieldElement>;
         }
     }
