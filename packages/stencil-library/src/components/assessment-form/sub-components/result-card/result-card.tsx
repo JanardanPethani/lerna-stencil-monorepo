@@ -18,7 +18,7 @@ export class ResultCard {
 
   render() {
     return (
-      <div class="mb-4 p-4 border rounded-lg shadow">
+      <div class="rounded overflow-hidden shadow-lg">
         <img src={this.result.imageUrl} alt={this.result.title} class="w-full h-48 object-cover mb-4" />
         <h3 class="text-xl font-semibold">{this.result.title}</h3>
         <p class="text-sm text-gray-600">Author: {this.result.author}</p>

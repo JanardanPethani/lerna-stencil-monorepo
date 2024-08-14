@@ -3,7 +3,7 @@ import algoliasearch from 'algoliasearch/lite';
 
 import ClockSvg from './assets/clock.svg';
 
-interface RichTextContent {
+export type RichTextContent = {
   data: Record<string, any>;
   content: Array<{
     data: Record<string, any>;
@@ -16,9 +16,9 @@ interface RichTextContent {
     nodeType: string;
   }>;
   nodeType: string;
-}
+};
 
-interface QuestionElement {
+export type QuestionElement = {
   type: 'radiogroup' | 'checkbox' | 'text' | 'boolean';
   name: string;
   title: string;
@@ -26,14 +26,14 @@ interface QuestionElement {
   isRequired?: boolean;
   labelTrue?: string;
   labelFalse?: string;
-}
+};
 
-interface QuestionPage {
+export type QuestionPage = {
   name: string;
   elements: QuestionElement[];
-}
+};
 
-interface AssessmentItem {
+export type AssessmentItem = {
   name: string;
   slug: string;
   intro: {
@@ -45,7 +45,7 @@ interface AssessmentItem {
   questions: {
     pages: QuestionPage[];
   };
-}
+};
 
 export type AssessmentData = {
   assessmentCollection: { items: AssessmentItem[] };
@@ -346,7 +346,7 @@ export class AssessmentForm {
         </div>
 
         {this.algoliaResults.length > 0 ? (
-          <div class="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3 mx-3">
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
             {this.algoliaResults.map(result => (
               <result-card result={result} />
             ))}
