@@ -75,7 +75,7 @@ export class AssessmentForm {
   private index: any;
 
   componentWillLoad() {
-    const client = algoliasearch('4WK61QBPDU', 'a3a8a3edba3b7ba9dad65b2984b91e69');
+    const client = algoliasearch('appID', 'apiKey');
     this.index = client.initIndex('algolia-recommendation-data');
   }
 
